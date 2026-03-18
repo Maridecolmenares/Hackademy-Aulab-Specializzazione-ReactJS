@@ -1,0 +1,17 @@
+[
+    {
+        "name": "SpongeBob",
+        "category": "Toy",
+        "price": 30
+    },
+    {
+        "name": "Patrick",
+        "category": "Toy",
+        "price": 25
+    },
+    {
+        "name": "Gary",
+        "category": "Toy",
+        "price": 25
+    }
+]
