@@ -1,0 +1,16 @@
+#root{
+display: flex;
+align-items: center;
+}
+#increment{
+background-color: #92f71f;
+width: 30px;
+margin-block: 10px;
+margin-right: 10px;
+}
+
+#decrement{
+background-color: #fa405f;
+width: 30px;
+margin-top: 10px;
+}
