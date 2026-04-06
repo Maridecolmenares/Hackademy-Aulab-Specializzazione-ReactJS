@@ -83,6 +83,7 @@ function App() {
           <Lista.Item key={index}>{name}</Lista.Item>
         ))}
       </Lista>
+      {/* Selfwork Gestione Side-effect */}
       <LoadingData />
     </>
   )

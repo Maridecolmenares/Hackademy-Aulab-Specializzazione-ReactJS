@@ -1,3 +1,4 @@
+// Selfwork Gestione Side-effect
 import { useEffect, useState } from "react";
 
 export default function LoadingData() {
