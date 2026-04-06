@@ -9,6 +9,7 @@ import Input from "./components/Input.jsx";
 import Section from "./components/Section.jsx";
 import Lista from "./components/Lista";
 import Form from "./components/Form";
+import LoadingData from "./components/LoadingData";
 
 
 
@@ -82,6 +83,7 @@ function App() {
           <Lista.Item key={index}>{name}</Lista.Item>
         ))}
       </Lista>
+      <LoadingData />
     </>
   )
 }
