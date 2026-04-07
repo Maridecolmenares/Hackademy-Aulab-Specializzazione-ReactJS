@@ -10,6 +10,10 @@ import Section from "./components/Section.jsx";
 import Lista from "./components/Lista";
 import Form from "./components/Form";
 import LoadingData from "./components/LoadingData";
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Posts from "./views/Posts";
+import Detail from "./views/Detail";
+import { Link } from "react-router";
 
 
 
@@ -29,62 +33,55 @@ function App() {
 
   return (
     <>
-      <Header>
-        <h1>Hello there!</h1>
-      </Header>
+      <BrowserRouter>
+        <Routes>
 
+          <Route path="/" element={
+            <>
+              <Header>
+                <h1>Hello there!</h1>
+              </Header>
 
-      {/* <Main nameList={nameList} addNewName={addNewName}>
-      </Main> */}
+              <Main>
+                <Main.Section>
+                  <Main.Section.Input onChange={handleChange}></Main.Section.Input>
+                  <Main.Section.Button onClick={() => addNewName(newName)}>
+                    Click Here!
+                  </Main.Section.Button>
+                </Main.Section>
 
-      {/* <Main addNewName={addNewName}>
-        <Section handleChange={handleChange} addNewName={addNewName} newName={newName}></Section>
-        <List>
-          {nameList.map((name, index) => {
-            return <Items key={index}>{name}</Items>
-          })}
-        </List>
-      </Main> */}
+                <Main.List>
+                  {nameList.map((name, index) => {
+                    return <Main.List.Items key={index}>{name}</Main.List.Items>
+                  })}
+                </Main.List>
+              </Main>
 
-      {/* <Main>
-        <Section>
-          <Input onChange={handleChange}></Input>
-          <Button onClick={() => addNewName(newName)}>Click Here!</Button>
-        </Section>
-        <List>
-          {nameList.map((name, index) => {
-            return <Items key={index}>{name}</Items>
-          })}
-        </List>
-      </Main> */}
+              <Form onSubmit={(e) => {
+                e.preventDefault();
+                addNewName(newName);
+              }}>
+                <Form.Input onChange={handleChange} value={newName} />
+                <Form.Button>Add Name</Form.Button>
+              </Form>
 
-      <Main>
-        <Main.Section>
-          <Main.Section.Input onChange={handleChange}></Main.Section.Input>
-          <Main.Section.Button onClick={() => addNewName(newName)}>Click Here!</Main.Section.Button>
-        </Main.Section>
-        <Main.List>
-          {nameList.map((name, index) => {
-            return <Main.List.Items key={index}>{name}</Main.List.Items>
-          })}
-        </Main.List>
-      </Main>
+              <Lista>
+                {nameList.map((name, index) => (
+                  <Lista.Item key={index}>{name}</Lista.Item>
+                ))}
+              </Lista>
 
-      <Form onSubmit={(e) => {
-        e.preventDefault();
-        addNewName(newName);
-      }}>
-        <Form.Input onChange={handleChange} value={newName} />
-        <Form.Button>Add Name</Form.Button>
-      </Form>
+              <LoadingData />
 
-      <Lista>
-        {nameList.map((name, index) => (
-          <Lista.Item key={index}>{name}</Lista.Item>
-        ))}
-      </Lista>
-      {/* Selfwork Gestione Side-effect */}
-      <LoadingData />
+              <Link to="/posts">Go to Posts</Link>
+            </>
+          } />
+
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:id" element={<Detail />} />
+
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
