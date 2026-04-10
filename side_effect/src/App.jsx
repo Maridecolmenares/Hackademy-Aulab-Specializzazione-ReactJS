@@ -1,54 +1,26 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Homepage from './views/Homepage';
+import Info from './views/Info';
+import Navbar from './components/Navbar';
+import Layout from './components/Layout';
+import DetailView from './views/DetailView';
+
 
 function App() {
 
-  // useEffect
-  const [posts, setPosts] = useState();
-  const [trigger, setTrigger] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getData = async () => {
-    const promise = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const json = await promise.json();
-    setPosts(json);
-    console.log(json);
-
-  }
-
-  useEffect(() => {
-    if (trigger) {
-      setTimeout(() => {
-        getData();
-        setIsLoading(false);
-      }, 2000);
-    }
-
-  }, [trigger]);
-
-  const handleClick = () => {
-    if (isVisible) {
-      setIsVisible(false);
-      setTrigger(false);
-      setPosts(null);
-    } else {
-      setIsVisible(true);
-      setTrigger(true);
-      setIsLoading(true);
-    }
-  }
 
   return (
     <>
-      <h1>Async React Lesson</h1>
-      <button onClick={handleClick}>Click here!</button>
-      {isLoading && <p>Loading data...</p>}
-      <ul>
-        {isVisible && posts && posts.map((post) => {
-          return <li key={post.id}>{post.title}</li>
-        })}
-      </ul>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Homepage />} />
+            <Route path="info" element={<Info />} />
+            <Route path="info/:id" element={<DetailView />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
