@@ -16,12 +16,12 @@ function App() {
   return (
     <>
       {/* Custom Hooks */}
-      <h1 text-red-500>Titles (Custom Hooks)</h1>
+      {/* <h1 text-red-500>Titles (Custom Hooks)</h1>
       <button onClick={() => setUrl('https://jsonplaceholder.typicode.com/posts')}>Posts</button>
       <button onClick={() => setUrl('https://jsonplaceholder.typicode.com/users')}>Users</button>
       <ul>
         {data && data.map((post) => <li key={post.id}>{post.title || post.name}</li>)}
-      </ul>
+      </ul> */}
       {/* Custom Hooks */}
 
 

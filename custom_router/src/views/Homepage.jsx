@@ -11,11 +11,18 @@ export default function Homepage() {
 
     return (
         <>
-            <h1>Homepage</h1>
-            <h2>{data}</h2>
-            <div id="form_section">
-                <input type="text" placeholder="New message" onChange={handleChange} />
-                <button onClick={handleClick}>Click here!</button>
+            <h1 className="text-3xl font-bold text-center mt-10">Homepage</h1>
+            <h2 className="text-xl text-center">{data}</h2>
+
+            <div id="form_section" className="flex justify-center gap-2 mt-4">
+                <input
+                    className="input input-bordered"
+                    placeholder="New message"
+                    onChange={handleChange}
+                />
+                <button className="btn btn-primary" onClick={handleClick}>
+                    Click here
+                </button>
             </div>
         </>
     )

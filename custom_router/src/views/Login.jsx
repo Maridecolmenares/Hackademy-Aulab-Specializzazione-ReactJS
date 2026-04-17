@@ -31,44 +31,45 @@ export default function Login() {
 
     return (
         <>
-            <h1>Login</h1>
-            <main id="form_section">
+            <h1 className="text-3xl font-bold text-center mt-10">Login</h1>
 
-                <form id="custom_form" onSubmit={handleSubmit(onSubmit)}>
+            <main id="form_section" className="flex justify-center items-center min-h-[80vh]">
+
+                <form
+                    id="custom_form"
+                    className="flex flex-col gap-4 p-6 bg-base-100 shadow-xl rounded-xl w-80"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
 
                     <div>
-                        <label>Email:</label>
+                        <label className="block mb-1">Email:</label>
                         <input
                             type="email"
-                            className="custom_input"
+                            className="input input-bordered w-full"
                             {...register("email", {
                                 required: "Email is required",
-                                maxLength: {
-                                    value: 50,
-                                    message: "Max 50 characters"
-                                }
+                                maxLength: { value: 50, message: "Max 50 characters" }
                             })}
                         />
-                        {errors.email && <p className="error">{errors.email.message}</p>}
+                        {errors.email && <p className="text-error text-sm">{errors.email.message}</p>}
                     </div>
 
                     <div>
-                        <label>Password:</label>
+                        <label className="block mb-1">Password:</label>
                         <input
                             type="password"
-                            className="custom_input"
+                            className="input input-bordered w-full"
                             {...register("password", {
                                 required: "Password is required",
-                                maxLength: {
-                                    value: 50,
-                                    message: "Max 50 characters"
-                                }
+                                maxLength: { value: 50, message: "Max 50 characters" }
                             })}
                         />
-                        {errors.password && <p className="error">{errors.password.message}</p>}
+                        {errors.password && <p className="text-error text-sm">{errors.password.message}</p>}
                     </div>
 
-                    <button id="form_btn">Login</button>
+                    <button id="form_btn" className="btn btn-primary w-full">
+                        Login
+                    </button>
                 </form>
             </main>
         </>

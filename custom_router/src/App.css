@@ -3,7 +3,7 @@ body {
   padding-top: 70px;
 }
 
-.dark_navbar {
+/* .dark_navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -54,14 +54,14 @@ padding: 15px 0;
 
 .nav_link.active {
   border-bottom: 2px solid #00d4ff;
-}
+} */
 
 #root{
   text-align: left;
 }
 
 /* Register */
-#form_section {
+/* #form_section {
   height: 80vh;
   display: flex;
   justify-content: center;
@@ -106,4 +106,4 @@ padding: 15px 0;
 
 #form_btn:hover {
   background-color: #3730a3;
-}
+} */

@@ -24,54 +24,50 @@ export default function Register() {
 
     return (
         <>
-            <h1>Register</h1>
+            <h1 className="text-3xl font-bold text-center mt-10">Register</h1>
 
-            <main id="form_section">
-                <form id="custom_form" onSubmit={handleSubmit(onSubmit)}>
+            <main id="form_section" className="flex justify-center items-center min-h-[80vh]">
+
+                <form
+                    id="custom_form"
+                    className="flex flex-col gap-4 p-6 bg-base-100 shadow-xl rounded-xl w-80"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
 
                     <input
-                        type="text"
+                        className="input input-bordered w-full"
                         placeholder="Name"
-                        className="custom_input"
                         {...register("username", {
                             required: "Name is required",
-                            maxLength: {
-                                value: 50,
-                                message: "Max 50 characters"
-                            }
+                            maxLength: { value: 50, message: "Max 50 characters" }
                         })}
                     />
-                    {errors.username && <p className="error text-red">{errors.username.message}</p>}
+                    {errors.username && <p className="text-error text-sm">{errors.username.message}</p>}
 
                     <input
-                        type="email"
+                        className="input input-bordered w-full"
                         placeholder="Email"
-                        className="custom_input"
                         {...register("email", {
                             required: "Email is required",
-                            maxLength: {
-                                value: 50,
-                                message: "Max 50 characters"
-                            }
+                            maxLength: { value: 50, message: "Max 50 characters" }
                         })}
                     />
-                    {errors.email && <p className="error text-red">{errors.email.message}</p>}
+                    {errors.email && <p className="text-error text-sm">{errors.email.message}</p>}
 
                     <input
                         type="password"
+                        className="input input-bordered w-full"
                         placeholder="Password"
-                        className="custom_input"
                         {...register("password", {
                             required: "Password is required",
-                            maxLength: {
-                                value: 50,
-                                message: "Max 50 characters"
-                            }
+                            maxLength: { value: 50, message: "Max 50 characters" }
                         })}
                     />
-                    {errors.password && <p className="error text-red">{errors.password.message}</p>}
+                    {errors.password && <p className="text-error text-sm">{errors.password.message}</p>}
 
-                    <button id="form_btn">Register</button>
+                    <button id="form_btn" className="btn btn-primary w-full">
+                        Register
+                    </button>
                 </form>
             </main>
         </>

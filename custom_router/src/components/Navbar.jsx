@@ -9,34 +9,51 @@ export default function Navbar() {
 
     return (
         //Custom Hooks
-        <nav ref={scrolled} className={scrollY > 0 ? "light_navbar" : "dark_navbar"}>
-            <ul id="nav_list">
+        <nav
+            ref={scrolled}
+            className={`navbar fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrollY > 0 ? "bg-base-100 shadow-md" : "bg-neutral"
+                }`}
+        >
+            <ul id="nav_list" className="flex gap-6 items-center justify-center w-full">
+
                 <li className="nav_item">
-                    <Link to={"/"} className="nav_link">Home</Link>
+                    <Link to="/" className="btn btn-ghost hover:text-blue-500">
+                        Home
+                    </Link>
                 </li>
-                {user && (<li className="nav_item">
-                    <Link to={"/info"} className="nav_link">Info</Link>
-                </li>
+
+                {user && (
+                    <li className="nav_item">
+                        <Link to="/info" className="btn btn-ghost hover:text-blue-500">
+                            Info
+                        </Link>
+                    </li>
                 )}
 
                 <li className="nav_item">
-                    <Link to={"/login"} className="nav_link">Login</Link>
+                    <Link to="/login" className="btn btn-ghost hover:text-blue-500">
+                        Login
+                    </Link>
                 </li>
 
-                {(!user && (
+                {!user ? (
                     <li className="nav_item">
-                        <Link to={"/register"} className="nav_link">Register</Link>
+                        <Link to="/register" className="btn btn-ghost hover:text-blue-500">
+                            Register
+                        </Link>
                     </li>
-                )) || (
-                        <>
-                            <li className="nav_item">
-                                <p className="nav_link">{user.name}</p>
-                            </li>
-                            <li className="nav_item">
-                                <button id="logout_btn" onClick={logout}>Logout</button>
-                            </li>
-                        </>
-                    )}
+                ) : (
+                    <>
+                        <li className="nav_item">
+                            <p className=" font-semibold">{user.name}</p>
+                        </li>
+                        <li className="nav_item">
+                            <button className="btn btn-sm btn-error" onClick={logout}>
+                                Logout
+                            </button>
+                        </li>
+                    </>
+                )}
 
             </ul>
         </nav>
