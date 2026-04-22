@@ -4,5 +4,21 @@
     --font-roboto: "Roboto", sans-serif;
     --font-electro: "Electrolize", sans-serif;
     --color-nav-gray: #d8d8d8;
+    --color-primary: #702EE9;
+    --color-secondary: #85079F;
+    --color-bg: #0B0C26;
+    --color-surface: #111C66;
 }
 @plugin "daisyui";
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #0B0C26;
+    color: white;
+    position: relative;
+    overflow-x: hidden;
+    background: #182B50;
+    background: radial-gradient(circle, rgba(24, 43, 80, 1) 50%, rgba(11, 12, 38, 1) 90%);
+}
+

@@ -7,7 +7,8 @@ export default function Homepage() {
 
     return (
         <>
-            <h1 className="font-electro text-3xl text-center font-bold">Reactor</h1>
+            <h1 className="font-electro text-3xl text-center font-bold mt-3">Reactor</h1>
+            <p className="font-electro text-xl text-center m-[20px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, id quisquam velit molestias qui animi sint asperiores, temporibus vero, eligendi facere nulla dolorem necessitatibus! Itaque consectetur eum commodi doloremque eaque!</p>
             <GameList>
                 {games.map((game) => {
                     return (
