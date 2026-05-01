@@ -1,24 +1,41 @@
+import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import { IoGameController } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import routes from "../../router/routes";
+// import { useLoaderData } from "react-router-dom";
 
 export default function Navbar() {
+    const [slug, setSlug] = useState("");
+
+    const handleChange = (e) => {
+        setSlug(e.target.value);
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter" && slug.trim()) {
+            window.location.href = `/search/${slug}`;
+        }
+    };
+
     return (
         <div className="navbar bg-[#0B0C26] text-white px-4">
 
-            {/* LEFT (лого як ти хотіла) */}
+            {/* LEFT */}
             <div className="flex-1">
-                <a className="text-xl font-bold flex items-center gap-2 cursor-pointer hover:text-[#85079F] transition w-fit">
+                <Link className="text-xl font-bold flex items-center gap-2 cursor-pointer hover:text-[#85079F] transition w-fit" to={routes.home}>
                     <IoGameController />
                     Reactor
-                </a>
+                </Link>
             </div>
 
             {/* RIGHT */}
             <div className="flex gap-4 items-center">
 
-                {/* LINKS (тільки текстовий hover) */}
+                {/* LINKS */}
                 <div className="hidden md:flex gap-4">
-                    <a className="cursor-pointer hover:text-[#85079F] transition">Home</a>
-                    <a className="cursor-pointer hover:text-[#85079F] transition">Games</a>
+                    <Link className="cursor-pointer hover:text-[#85079F] transition" to={routes.home}>Home</Link>
+                    <a className="cursor-pointer hover:text-[#85079F] transition">About</a>
                 </div>
 
                 {/* SEARCH */}
@@ -26,7 +43,14 @@ export default function Navbar() {
                     type="text"
                     placeholder="Search..."
                     className="input input-bordered w-24 md:w-auto bg-[#1E356A] border-none focus:outline-none text-white"
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                 />
+                <Link className="btn btn-square bg-[#702EE9] hover:bg-[#85079F] border-none" to={`/search/${slug}`}>
+                    <FaSearch />
+                </Link>
+
+
                 {/* USER DROPDOWN */}
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -52,6 +76,6 @@ export default function Navbar() {
                     </ul>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
