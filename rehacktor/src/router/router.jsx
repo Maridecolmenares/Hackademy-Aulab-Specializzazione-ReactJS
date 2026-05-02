@@ -4,11 +4,14 @@ import Homepage from "../views/Homepage";
 import routes from "../router/routes";
 import { getAllGamesLoader, getSearchedGames } from "./loaders";
 import SearchPage from "../views/SearchPage";
+import { getAllGenres, getFilteredByGenreGames } from "./loaders";
+import GenrePage from "../views/GenrePage";
 
 const router = createBrowserRouter([
     {
         path: routes.home,
         Component: Layout,
+        loader: getAllGenres,
         children: [
             {
                 path: routes.home,
@@ -19,6 +22,11 @@ const router = createBrowserRouter([
                 path: routes.search,
                 Component: SearchPage,
                 loader: getSearchedGames
+            },
+            {
+                path: routes.genre,
+                Component: GenrePage,
+                loader: getFilteredByGenreGames
             }
         ]
     }
