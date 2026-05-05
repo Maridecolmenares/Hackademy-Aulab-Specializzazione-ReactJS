@@ -36,6 +36,8 @@ export default function Navbar() {
                 <div className="hidden md:flex gap-4">
                     <Link className="cursor-pointer hover:text-[#85079F] transition" to={routes.home}>Home</Link>
                     <a className="cursor-pointer hover:text-[#85079F] transition">About</a>
+                    <Link to={routes.login} className="hover:text-[#85079F]">Login</Link>
+                    <Link to={routes.register} className="hover:text-[#85079F]">Register</Link>
                 </div>
 
                 {/* SEARCH */}
@@ -65,6 +67,8 @@ export default function Navbar() {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#182B50] rounded-box w-52"
                     >
+                        <li><Link to={routes.login} className="hover:text-[#85079F]">Login</Link></li>
+                        <li><Link to={routes.register} className="hover:text-[#85079F]">Register</Link></li>
                         <li>
                             <a className="justify-between">
                                 Profile

@@ -1,7 +1,7 @@
 import { Outlet, useLoaderData } from "react-router-dom";
-import Navbar from "../components/LayoutComponents/Navbar";
-import Footer from "../components/LayoutComponents/Footer";
-import Sidebar from "./LayoutComponents/Sidebar";
+import Navbar from "../LayoutComponents/Navbar";
+import Footer from "../LayoutComponents/Footer";
+import Sidebar from "../LayoutComponents/Sidebar";
 
 export default function Layout() {
     const genres = useLoaderData();
