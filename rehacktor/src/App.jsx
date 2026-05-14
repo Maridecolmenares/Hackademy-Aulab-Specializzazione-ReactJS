@@ -2,13 +2,16 @@ import { useState } from 'react'
 import './App.css'
 import { RouterProvider } from 'react-router-dom';
 import router from './router/router';
+import UserContextProvider from "./context/UserContext";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <RouterProvider router={router} />
+      <UserContextProvider>
+        <RouterProvider router={router} />
+      </UserContextProvider>
     </>
   )
 }

@@ -4,9 +4,12 @@ import { IoGameController } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import routes from "../../router/routes";
 // import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export default function Navbar() {
     const [slug, setSlug] = useState("");
+    const { user, signOut } = useContext(UserContext);
 
     const handleChange = (e) => {
         setSlug(e.target.value);
@@ -16,6 +19,11 @@ export default function Navbar() {
         if (e.key === "Enter" && slug.trim()) {
             window.location.href = `/search/${slug}`;
         }
+    };
+
+    const handleLogout = async () => {
+        await navigate('/');
+        signOut();
     };
 
     return (
@@ -36,8 +44,27 @@ export default function Navbar() {
                 <div className="hidden md:flex gap-4">
                     <Link className="cursor-pointer hover:text-[#85079F] transition" to={routes.home}>Home</Link>
                     <a className="cursor-pointer hover:text-[#85079F] transition">About</a>
-                    <Link to={routes.login} className="hover:text-[#85079F]">Login</Link>
-                    <Link to={routes.register} className="hover:text-[#85079F]">Register</Link>
+                    {/* <Link to={routes.login} className="hover:text-[#85079F]">Login</Link>
+                    <Link to={routes.register} className="hover:text-[#85079F]">Register</Link> */}
+
+                    {!user ? (
+                        <>
+                            <Link to={routes.login} className="hover:text-[#85079F]">
+                                Login
+                            </Link>
+
+                            <Link to={routes.register} className="hover:text-[#85079F]">
+                                Register
+                            </Link>
+                        </>
+                    ) : (
+                        <button onClick={handleLogout} className="hover:text-[#85079F]">
+                            Logout
+                        </button>
+                    )
+                    }
+
+
                 </div>
 
                 {/* SEARCH */}
@@ -48,8 +75,8 @@ export default function Navbar() {
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                 />
-                <Link className="btn btn-square bg-[#702EE9] hover:bg-[#85079F] border-none" to={`/search/${slug}`}>
-                    <FaSearch />
+                <Link className="btn btn-square bg-[#1E356A] border-none hover:bg-[#7f46e7]" to={`/search/${slug}`}>
+                    <FaSearch className="text-white" />
                 </Link>
 
 
