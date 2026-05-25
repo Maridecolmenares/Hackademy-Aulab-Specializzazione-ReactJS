@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGameController } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "../../router/routes";
 // import { useLoaderData } from "react-router-dom";
 import { useContext } from "react";
@@ -10,6 +10,7 @@ import { UserContext } from "../../context/UserContext";
 export default function Navbar() {
     const [slug, setSlug] = useState("");
     const { user, signOut } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setSlug(e.target.value);
@@ -22,8 +23,8 @@ export default function Navbar() {
     };
 
     const handleLogout = async () => {
-        await navigate('/');
-        signOut();
+        await signOut();
+        navigate('/');
     };
 
     return (
@@ -46,24 +47,6 @@ export default function Navbar() {
                     <a className="cursor-pointer hover:text-[#85079F] transition">About</a>
                     {/* <Link to={routes.login} className="hover:text-[#85079F]">Login</Link>
                     <Link to={routes.register} className="hover:text-[#85079F]">Register</Link> */}
-
-                    {!user ? (
-                        <>
-                            <Link to={routes.login} className="hover:text-[#85079F]">
-                                Login
-                            </Link>
-
-                            <Link to={routes.register} className="hover:text-[#85079F]">
-                                Register
-                            </Link>
-                        </>
-                    ) : (
-                        <button onClick={handleLogout} className="hover:text-[#85079F]">
-                            Logout
-                        </button>
-                    )
-                    }
-
 
                 </div>
 
@@ -92,18 +75,50 @@ export default function Navbar() {
 
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#182B50] rounded-box w-52"
+                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#182B50] rounded-box w-52 border border-[#2B3F77]"
                     >
-                        <li><Link to={routes.login} className="hover:text-[#85079F]">Login</Link></li>
-                        <li><Link to={routes.register} className="hover:text-[#85079F]">Register</Link></li>
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge bg-[#702EE9] border-none">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+
+                        {!user ? (
+                            <>
+                                <li>
+                                    <Link
+                                        to={routes.login}
+                                        className="hover:text-[#85079F] transition"
+                                    >
+                                        Login
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link
+                                        to={routes.register}
+                                        className="hover:text-[#85079F] transition"
+                                    >
+                                        Register
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link
+                                        to={routes.profile}
+                                        className="hover:text-[#85079F] transition"
+                                    >
+                                        Profile
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="hover:text-[#85079F] transition text-left"
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>

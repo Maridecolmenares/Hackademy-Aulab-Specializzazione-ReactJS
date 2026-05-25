@@ -9,6 +9,8 @@ import GenrePage from "../views/GenrePage";
 import AuthLayout from "../components/layouts/AuthLayout";
 import LoginPage from "../views/auth/LoginPage";
 import RegisterPage from "../views/auth/RegisterPage";
+import ProfilePage from "../views/auth/ProfilePage";
+import ProfileSettingsPage from "../views/auth/ProfileSettingsPage";
 
 
 const router = createBrowserRouter([
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
             {
                 path: 'register',
                 Component: RegisterPage
+            },
+            {
+                path: 'profile',
+                Component: ProfilePage
+            },
+            {
+                path: 'profile/settings',
+                Component: ProfileSettingsPage
             }
         ]
     }

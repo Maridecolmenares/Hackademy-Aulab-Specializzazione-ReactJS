@@ -55,6 +55,17 @@ export default function UserContextProvider({ children }) {
         await getUser();
     };
 
+    const updateProfile = async (newProfile) => {
+
+        const { data, error } = await supabase
+            .from('profiles')
+            .update(newProfile)
+            .eq('id', user.id)
+            .select();
+
+        await getUser();
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -63,7 +74,8 @@ export default function UserContextProvider({ children }) {
                 signOut,
                 signUp,
                 login,
-                getUser
+                getUser,
+                updateProfile
             }}
         >
             {children}
