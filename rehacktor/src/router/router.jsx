@@ -11,7 +11,8 @@ import LoginPage from "../views/auth/LoginPage";
 import RegisterPage from "../views/auth/RegisterPage";
 import ProfilePage from "../views/auth/ProfilePage";
 import ProfileSettingsPage from "../views/auth/ProfileSettingsPage";
-
+import DetailPage from "../views/DetailPage";
+import { getGameDetails } from "./loaders";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
                 Component: ProfileSettingsPage
             }
         ]
+    },
+    {
+        path: routes.detail,
+        Component: DetailPage,
+        loader: getGameDetails
     }
 ]);
 
