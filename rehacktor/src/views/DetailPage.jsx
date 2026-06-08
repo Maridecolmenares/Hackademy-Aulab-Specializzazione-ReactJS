@@ -5,8 +5,13 @@ import { useLoaderData } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import BodySection from "../components/DetailComponents/BodySection";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 export default function DetailPage() {
   const game = useLoaderData();
+  const { profile } = useContext(UserContext);
 
   return (
     <>
@@ -33,6 +38,7 @@ export default function DetailPage() {
         }}
       >
         <Header game={game} />
+        {profile && <BodySection game={game} profile_id={profile.id} />}
         <div className="max-w-7xl mx-auto px-6 pt-8">
           <Link
             to="/"
