@@ -6,6 +6,10 @@ import { supabase } from "../../database/supabase";
 export default function BodySection({ game, profile_id }) {
   const [isFavourite, setIsFavourite] = useState(false);
 
+  const [description, setDescription] = useState("");
+  const [gameReviews, setGameReviews] = useState([]);
+  const [checkReview, setCheckReview] = useState(false);
+
   const addGame = async () => {
     await supabase.from("favourites").insert([
       {
@@ -40,58 +44,133 @@ export default function BodySection({ game, profile_id }) {
     }
   };
 
+  const getReviews = async () => {
+    const { data: reviews } = await supabase
+      .from("reviews")
+      .select("*")
+      .eq("game_id", game.id);
+
+    setGameReviews(reviews || []);
+  };
+
+  const addReview = async () => {
+    if (!description.trim()) return;
+
+    await supabase.from("reviews").insert([
+      {
+        profile_id,
+        game_id: game.id,
+        game_name: game.name,
+        description,
+      },
+    ]);
+
+    setDescription("");
+    setCheckReview(!checkReview);
+  };
+
   useEffect(() => {
     getFavourite();
-  }, []);
+    getReviews();
+  }, [checkReview]);
 
   return (
     <section className="max-w-7xl mx-auto px-6 pb-16">
       <div
         className="
-                    bg-[#0B0C26]/70
-                    border border-[#2E3A6B]
-                    rounded-2xl
-                    backdrop-blur-sm
-                    p-8
-                "
+          bg-[#0B0C26]/70
+          border border-[#2E3A6B]
+          rounded-2xl
+          backdrop-blur-sm
+          p-8
+        "
       >
         <h2 className="text-2xl font-bold text-white mb-8">Community</h2>
 
-        <div className="flex flex-col items-center">
-          <p className="text-white text-lg mb-6">Reviews</p>
+        <div className="grid lg:grid-cols-[1fr_250px] gap-10">
+          {/* REVIEWS */}
+          <div>
+            <p className="text-white text-lg mb-6 font-semibold">Reviews</p>
 
-          <textarea
-            className="
-                            textarea
-                            w-full
-                            max-w-2xl
-                            h-40
-                            bg-[#111633]
-                            border-[#2E3A6B]
-                            text-white
-                            focus:border-[#702EE9]
-                        "
-            placeholder="Write your review..."
-          />
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="
+                textarea
+                w-full
+                h-40
+                bg-[#111633]
+                border-[#2E3A6B]
+                text-white
+                focus:border-[#702EE9]
+              "
+              placeholder="Write your review..."
+            />
 
-          <div className="mt-8 text-center">
+            <button
+              onClick={addReview}
+              className="
+                mt-4
+                px-6
+                py-3
+                rounded-xl
+                bg-[#702EE9]
+                hover:bg-[#85079F]
+                text-white
+                transition
+              "
+            >
+              Send Review
+            </button>
+
+            <div
+              className="
+                mt-8
+                space-y-4
+                max-h-[400px]
+                overflow-y-auto
+                pr-2
+              "
+            >
+              {gameReviews.length > 0 ? (
+                gameReviews.map((review, index) => (
+                  <div
+                    key={index}
+                    className="
+                      bg-[#111633]
+                      border border-[#2E3A6B]
+                      rounded-xl
+                      p-4
+                      text-gray-300
+                    "
+                  >
+                    {review.description}
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">No reviews yet.</p>
+              )}
+            </div>
+          </div>
+
+          {/* FAVOURITES */}
+          <div className="flex flex-col items-center justify-center">
             {isFavourite ? (
               <>
                 <FaHeart
                   onClick={removeGame}
                   className="
-          text-[#C32E8C]
-          text-5xl
-          cursor-pointer
-          hover:scale-110
-          hover:drop-shadow-[0_0_12px_#C32E8C]
-          transition-all
-          duration-300
-          mx-auto
-        "
+                    text-[#C32E8C]
+                    text-6xl
+                    cursor-pointer
+                    hover:scale-110
+                    hover:drop-shadow-[0_0_12px_#C32E8C]
+                    transition-all
+                    duration-300
+                  "
                 />
 
-                <p className="mt-4 text-[#C32E8C] font-medium">
+                <p className="mt-4 text-[#C32E8C] font-medium text-center">
                   Added to favourites
                 </p>
               </>
@@ -100,18 +179,17 @@ export default function BodySection({ game, profile_id }) {
                 <FaRegHeart
                   onClick={addGame}
                   className="
-          text-gray-400
-          text-5xl
-          cursor-pointer
-          hover:text-[#702EE9]
-          hover:scale-110
-          transition-all
-          duration-300
-          mx-auto
-        "
+                    text-gray-400
+                    text-6xl
+                    cursor-pointer
+                    hover:text-[#702EE9]
+                    hover:scale-110
+                    transition-all
+                    duration-300
+                  "
                 />
 
-                <p className="mt-4 text-gray-300 font-medium">
+                <p className="mt-4 text-gray-300 font-medium text-center">
                   Add to favourites
                 </p>
               </>
