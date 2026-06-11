@@ -9,6 +9,7 @@ export default function BodySection({ game, profile_id }) {
   const [description, setDescription] = useState("");
   const [gameReviews, setGameReviews] = useState([]);
   const [checkReview, setCheckReview] = useState(false);
+  const [rating, setRating] = useState(5);
 
   const addGame = async () => {
     await supabase.from("favourites").insert([
@@ -16,6 +17,7 @@ export default function BodySection({ game, profile_id }) {
         profile_id,
         game_id: game.id,
         game_name: game.name,
+        game_image: game.background_image,
       },
     ]);
 
@@ -47,7 +49,12 @@ export default function BodySection({ game, profile_id }) {
   const getReviews = async () => {
     const { data: reviews } = await supabase
       .from("reviews")
-      .select("*")
+      .select(
+        `
+      *,
+      profiles(username)
+    `,
+      )
       .eq("game_id", game.id);
 
     setGameReviews(reviews || []);
@@ -62,10 +69,18 @@ export default function BodySection({ game, profile_id }) {
         game_id: game.id,
         game_name: game.name,
         description,
+        rating,
       },
     ]);
 
     setDescription("");
+    setRating(5);
+    setCheckReview(!checkReview);
+  };
+
+  const deleteReview = async (reviewId) => {
+    await supabase.from("reviews").delete().eq("id", reviewId);
+
     setCheckReview(!checkReview);
   };
 
@@ -90,7 +105,27 @@ export default function BodySection({ game, profile_id }) {
         <div className="grid lg:grid-cols-[1fr_250px] gap-10">
           {/* REVIEWS */}
           <div>
-            <p className="text-white text-lg mb-6 font-semibold">Reviews</p>
+            <p className="text-white text-lg mb-6 font-semibold">
+              Reviews ({gameReviews.length})
+            </p>
+
+            <div className="flex gap-2 mb-4">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setRating(star)}
+                  className={`
+        text-4xl
+        transition-all
+        duration-300
+        ${star <= rating ? "text-[#C32E8C]" : "text-gray-500"}
+      `}
+                >
+                  ★
+                </button>
+              ))}
+            </div>
 
             <textarea
               value={description}
@@ -144,7 +179,35 @@ export default function BodySection({ game, profile_id }) {
                       text-gray-300
                     "
                   >
-                    {review.description}
+                    <p className="font-semibold text-white mb-2">
+                      {review.profiles?.username || "Unknown User"}
+                    </p>
+                    <>
+                      <div className="mb-3 text-[#C32E8C] text-lg">
+                        {"★".repeat(review.rating)}
+                        {"☆".repeat(5 - review.rating)}
+                      </div>
+
+                      <p className="text-sm text-gray-500 mb-3">
+                        {new Date(review.created_at).toLocaleDateString()}
+                      </p>
+
+                      <p>{review.description}</p>
+                      {review.profile_id === profile_id && (
+                        <button
+                          onClick={() => deleteReview(review.id)}
+                          className="
+      mt-4
+      text-red-400
+      hover:text-red-300
+      transition
+      text-sm
+    "
+                        >
+                          Delete review
+                        </button>
+                      )}
+                    </>
                   </div>
                 ))
               ) : (
