@@ -22,3 +22,19 @@ body {
         background: radial-gradient(circle, rgba(24, 43, 80, 0.87) 50%, rgba(11, 12, 38, 1) 90%);
 }
 
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeUp {
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards;
+}
