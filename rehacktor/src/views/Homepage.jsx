@@ -78,7 +78,7 @@ export default function Homepage() {
       }}
     >
       {/* HERO */}
-      <section className="max-w-5xl mx-auto px-6 py-12 text-center">
+      <section className="max-w-5xl mx-auto px-4 md:px-6 py-12 text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-white">
           Welcome to <span className="text-[#C32E8C]">REACTOR</span>
         </h1>
@@ -127,13 +127,13 @@ export default function Homepage() {
         <p className="text-gray-400 mt-1">Recently released games.</p>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-4 md:grid-cols-8 gap-4 mb-12">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 mb-12">
         {newReleases.map((game) => (
           <Link key={game.id} to={`/detail/${game.id}`} className="group">
             <img
               src={game.background_image}
               alt={game.name}
-              className="rounded-xl h-[180px] w-full object-cover transition duration-300 group-hover:scale-105"
+              className="rounded-xl aspect-[3/4] w-full object-cover transition duration-300 group-hover:scale-105"
             />
             <p className="text-white mt-2 text-sm">{game.name}</p>
           </Link>
@@ -148,13 +148,13 @@ export default function Homepage() {
         <p className="text-gray-400 mt-1">Games coming soon.</p>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-4 md:grid-cols-8 gap-4 mb-12">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 mb-12">
         {upcoming.map((game) => (
           <Link key={game.id} to={`/detail/${game.id}`} className="group">
             <img
               src={game.background_image}
               alt={game.name}
-              className="rounded-xl h-[180px] w-full object-cover transition duration-300 group-hover:scale-105"
+              className=" rounded-xl aspect-[3/4] w-full object-cover transition duration-300 group-hover:scale-105"
             />
             <p className="text-[#C32E8C] text-xs mt-1">
               Release: {game.released}

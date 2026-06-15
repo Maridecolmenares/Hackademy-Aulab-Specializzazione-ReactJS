@@ -6,11 +6,11 @@ export async function getAllGamesLoader() {
       ),
 
       fetch(
-        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2024-01-01,2025-12-31&ordering=-released&page_size=8`,
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2024-01-01,2025-12-31&ordering=-released&page_size=20`,
       ),
 
       fetch(
-        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2025-01-01,2026-12-31&ordering=released&page_size=8`,
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2025-01-01,2026-12-31&ordering=released&page_size=20`,
       ),
     ]);
 
@@ -19,9 +19,13 @@ export async function getAllGamesLoader() {
   const upcoming = await upcomingResponse.json();
 
   return {
-    trending: trending.results,
-    newReleases: newReleases.results,
-    upcoming: upcoming.results,
+    trending: trending.results.filter((game) => game.background_image),
+    newReleases: newReleases.results
+      .filter((game) => game.background_image)
+      .slice(0, 8),
+    upcoming: upcoming.results
+      .filter((game) => game.background_image)
+      .slice(0, 8),
   };
 }
 
