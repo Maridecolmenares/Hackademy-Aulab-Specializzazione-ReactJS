@@ -107,11 +107,28 @@ export default function Homepage() {
 
       {/* TRENDING */}
       <div className="animate-fadeUp" style={{ animationDelay: "0.2s" }}>
-        <section className="max-w-7xl mx-auto px-6 mb-2">
-          <h2 className="text-xl font-bold text-white">Trending Games</h2>
-          <p className="text-gray-400 mt-1">
-            Discover what gamers are playing right now.
-          </p>
+        <section className="max-w-7xl mx-auto px-6 mb-4 flex items-end justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white">Trending Games</h2>
+
+            <p className="text-gray-400 mt-1">
+              Discover what gamers are playing right now.
+            </p>
+          </div>
+
+          <Link
+            to={routes.games}
+            className="
+      text-sm
+      text-[#C32E8C]
+      hover:text-[#702EE9]
+      transition
+      font-medium
+      whitespace-nowrap
+    "
+          >
+            View All →
+          </Link>
         </section>
 
         <GameList>
@@ -123,9 +140,26 @@ export default function Homepage() {
         <div className="h-px max-w-5xl mx-auto mb-10 bg-gradient-to-r from-transparent via-[#702EE9] to-transparent" />
 
         {/* NEW RELEASES */}
-        <section className="max-w-7xl mx-auto px-6 mb-4">
-          <h2 className="text-xl font-bold text-white">New Releases</h2>
-          <p className="text-gray-400 mt-1">Recently released games.</p>
+        <section className="max-w-7xl mx-auto px-6 mb-4 flex items-end justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white">New Releases</h2>
+
+            <p className="text-gray-400 mt-1">Recently released games.</p>
+          </div>
+
+          <Link
+            to={routes.games}
+            className="
+      text-sm
+      text-[#C32E8C]
+      hover:text-[#702EE9]
+      transition
+      font-medium
+      whitespace-nowrap
+    "
+          >
+            View All →
+          </Link>
         </section>
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 mb-12">
@@ -144,9 +178,26 @@ export default function Homepage() {
         <div className="h-px max-w-5xl mx-auto mb-10 bg-gradient-to-r from-transparent via-[#702EE9] to-transparent" />
 
         {/* UPCOMING */}
-        <section className="max-w-7xl mx-auto px-6 mb-4">
-          <h2 className="text-xl font-bold text-white">Upcoming Releases</h2>
-          <p className="text-gray-400 mt-1">Games coming soon.</p>
+        <section className="max-w-7xl mx-auto px-6 mb-4 flex items-end justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white">Upcoming Releases</h2>
+
+            <p className="text-gray-400 mt-1">Games coming soon.</p>
+          </div>
+
+          <Link
+            to={routes.games}
+            className="
+      text-sm
+      text-[#C32E8C]
+      hover:text-[#702EE9]
+      transition
+      font-medium
+      whitespace-nowrap
+    "
+          >
+            View All →
+          </Link>
         </section>
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 mb-12">
@@ -167,11 +218,28 @@ export default function Homepage() {
         <div className="h-px max-w-5xl mx-auto mb-10 bg-gradient-to-r from-transparent via-[#702EE9] to-transparent" />
 
         {/* LATEST REVIEWS */}
-        <section className="max-w-7xl mx-auto px-6 mb-4">
-          <h2 className="text-xl font-bold text-white">Latest Reviews</h2>
-          <p className="text-gray-400 mt-1">
-            Recent reviews from the community.
-          </p>
+        <section className="max-w-7xl mx-auto px-6 mb-4 flex items-end justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white">Latest Reviews</h2>
+
+            <p className="text-gray-400 mt-1">
+              Recent reviews from the community.
+            </p>
+          </div>
+
+          <Link
+            to="/reviews"
+            className="
+      text-sm
+      text-[#C32E8C]
+      hover:text-[#702EE9]
+      transition
+      font-medium
+      whitespace-nowrap
+    "
+          >
+            Community Reviews →
+          </Link>
         </section>
 
         <div className="max-w-7xl mx-auto px-6 pb-16 grid md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -102,3 +102,30 @@ export async function getUpcomingGames() {
 
   return json.results;
 }
+
+export async function getAllGames() {
+  const [trendingResponse, newReleasesResponse, upcomingResponse] =
+    await Promise.all([
+      fetch(
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&ordering=-rating&page_size=40`,
+      ),
+
+      fetch(
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2024-01-01,2025-12-31&ordering=-released&page_size=40`,
+      ),
+
+      fetch(
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}&dates=2025-01-01,2026-12-31&ordering=released&page_size=40`,
+      ),
+    ]);
+
+  const trending = await trendingResponse.json();
+  const newReleases = await newReleasesResponse.json();
+  const upcoming = await upcomingResponse.json();
+
+  return {
+    trending: trending.results,
+    newReleases: newReleases.results,
+    upcoming: upcoming.results,
+  };
+}
